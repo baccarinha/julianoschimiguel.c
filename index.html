@@ -7,7 +7,7 @@
 <style>
 body{
     margin:0;
-    background:#252526;
+    background:#000000; /* Fundo totalmente preto */
     font-family:Consolas, Monaco, monospace;
     padding:40px 0;
 }
@@ -16,10 +16,10 @@ body{
     width:95%;
     max-width:1200px;
     margin:0 auto;
-    background:#1e1e1e;
+    background:#000000; /* Editor preto */
     padding:25px;
     border-radius:8px;
-    box-shadow:0 0 25px rgba(0,0,0,0.6);
+    box-shadow:0 0 30px rgba(0,255,0,0.2); /* leve brilho hacker */
     position:relative;
 }
 
@@ -27,8 +27,8 @@ button{
     position:absolute;
     top:15px;
     right:15px;
-    background:#0e639c;
-    color:white;
+    background:#00ff88;
+    color:#000;
     border:none;
     padding:8px 14px;
     border-radius:5px;
@@ -37,7 +37,7 @@ button{
 }
 
 button:hover{
-    background:#1177bb;
+    background:#00ffaa;
 }
 
 pre{
@@ -45,6 +45,7 @@ pre{
     font-size:15px;
     line-height:1.6;
     counter-reset: line;
+    color:#ffffff; /* texto padrão branco */
 }
 
 .line{
@@ -60,22 +61,22 @@ pre{
     left:0;
     width:50px;
     text-align:right;
-    color:#858585;
+    color:#555555; /* número da linha cinza */
 }
 
-/* Cores VS Code */
-.include{color:#569CD6;}
-.type{color:#4EC9B0;}
-.keyword{color:#C586C0;}
-.string{color:#CE9178;}
-.comment{color:#6A9955;}
-.function{color:#DCDCAA;}
-.number{color:#B5CEA8;}
+/* Cores estilo VS Code mais vibrantes */
+.include{color:#00BFFF;}       /* azul vivo */
+.type{color:#00FFAA;}          /* verde água */
+.keyword{color:#FF00FF;}       /* roxo forte */
+.string{color:#FFD700;}        /* amarelo */
+.comment{color:#00FF00;}       /* verde hacker */
+.function{color:#FF5555;}      /* vermelho suave */
+.number{color:#FFA500;}        /* laranja */
 
 .cursor{
     display:inline-block;
     width:8px;
-    background:#ffffff;
+    background:#00FF00;
     margin-left:3px;
     animation:blink 1s infinite;
 }
