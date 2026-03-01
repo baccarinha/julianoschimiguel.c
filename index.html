@@ -86,6 +86,23 @@ pre{
     50%{opacity:0;}
     100%{opacity:1;}
 }
+
+    .terminal{
+    width:95%;
+    max-width:1200px;
+    margin:40px auto;
+    background:#111;
+    padding:25px;
+    border-radius:8px;
+    color:#00FF00;
+    font-family:Consolas, monospace;
+}
+
+#saida{
+    margin-top:20px;
+    white-space:pre-line;
+}
+    
 </style>
 </head>
 
@@ -96,7 +113,56 @@ pre{
 <pre id="codigo"></pre>
 </div>
 
+<div class="terminal">
+<h3>Simulação do Programa</h3>
+
+<label>Nome do funcionário:</label><br>
+<input type="text" id="nome"><br><br>
+
+<label>Cargo:</label><br>
+<select id="cargo">
+<option value="1">Auxiliar nos Carrinhos</option>
+<option value="2">Operador de Caixa</option>
+<option value="3">Auxiliar de Self</option>
+<option value="4">Assistente de Frente de Caixa</option>
+<option value="5">Fiscal</option>
+</select><br><br>
+
+<label>Período:</label><br>
+<select id="periodo">
+<option value="1">06:40 às 16:00</option>
+<option value="2">08:00 às 16:20</option>
+<option value="3">10:30 às 18:50</option>
+<option value="4">13:00 às 21:20</option>
+<option value="5">14:30 às 22:50</option>
+</select><br><br>
+
+<button onclick="executarPrograma()">Executar</button>
+
+<div id="saida"></div>
+</div>
+    
 <script>
+
+    function executarPrograma(){
+
+    const nome = document.getElementById("nome").value;
+    const cargoSelect = document.getElementById("cargo");
+    const periodoSelect = document.getElementById("periodo");
+
+    const cargoTexto = cargoSelect.options[cargoSelect.selectedIndex].text;
+    const periodoTexto = periodoSelect.options[periodoSelect.selectedIndex].text;
+
+    const saida = `
+--- INFORMAÇÕES DO FUNCIONÁRIO DA LOJA FORT ATACADISTA - JUNDIAÍ ---
+
+Nome: ${nome}
+Cargo: ${cargoTexto}
+Horário: ${periodoTexto}
+`;
+
+    document.getElementById("saida").innerText = saida;
+}
 
 const codigoColorido = `
 <span class="include">#include &lt;stdio.h&gt;</span>
