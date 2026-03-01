@@ -2,24 +2,24 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Código em C - VS Code Style</title>
+<title>codigo_funcionario.c</title>
 
 <style>
     body {
         margin: 0;
         background-color: #1e1e1e;
         font-family: Consolas, Monaco, monospace;
-        padding: 40px 0; /* Espaço em cima e embaixo */
+        padding: 40px 0;
     }
 
     .editor {
         background-color: #1e1e1e;
+        width: 95%;
+        max-width: 1200px;
+        margin: 0 auto;
         padding: 30px;
         border-radius: 8px;
         box-shadow: 0 0 25px rgba(0,0,0,0.7);
-        width: 95%;
-        max-width: 1200px;
-        margin: 0 auto; /* Centraliza horizontalmente */
         overflow-x: auto;
     }
 
@@ -31,13 +31,14 @@
         white-space: pre;
     }
 
-    .include { color: #569cd6; }
-    .type { color: #4ec9b0; }
-    .keyword { color: #c586c0; }
-    .string { color: #ce9178; }
-    .comment { color: #6a9955; }
-    .function { color: #dcdcaa; }
-    .number { color: #b5cea8; }
+    /* Cores estilo VS Code */
+    .include { color: #569CD6; }
+    .type { color: #4EC9B0; }
+    .keyword { color: #C586C0; }
+    .string { color: #CE9178; }
+    .comment { color: #6A9955; }
+    .function { color: #DCDCAA; }
+    .number { color: #B5CEA8; }
 </style>
 </head>
 
@@ -45,78 +46,76 @@
 
 <div class="editor">
 <pre>
+<span class="include">#include &lt;stdio.h&gt;</span>
+<span class="include">#include &lt;string.h&gt;</span>
 
-#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
-
-// Função para mostrar o menu de cargos
-void mostrarMenuCargo() {
-    printf("\nEscolha o cargo fornecido para o funcionário:\n");
-    printf("1 - Auxiliar nos Carrinhos\n");
-    printf("2 - Operador de Caixa\n");
-    printf("3 - Auxiliar de Self\n");
-    printf("4 - Assistente de Frente de Caixa\n");
-    printf("5 - Fiscal\n");
+<span class="comment">// Função para mostrar o menu de cargos</span>
+<span class="type">void</span> <span class="function">mostrarMenuCargo</span>() {
+    printf(<span class="string">"\nEscolha o cargo fornecido para o funcionário:\n"</span>);
+    printf(<span class="string">"1 - Auxiliar nos Carrinhos\n"</span>);
+    printf(<span class="string">"2 - Operador de Caixa\n"</span>);
+    printf(<span class="string">"3 - Auxiliar de Self\n"</span>);
+    printf(<span class="string">"4 - Assistente de Frente de Caixa\n"</span>);
+    printf(<span class="string">"5 - Fiscal\n"</span>);
 }
 
-// Função para mostrar o menu de períodos
-void mostrarMenuPeriodo() {
-    printf("\nEscolha o período trabalhado deste funcionário:\n");
-    printf("1 - 06:40 às 16:00\n");
-    printf("2 - 08:00 às 16:20\n");
-    printf("3 - 10:30 às 18:50\n");
-    printf("4 - 13:00 às 21:20\n");
-    printf("5 - 14:30 às 22:50\n");
+<span class="comment">// Função para mostrar o menu de períodos</span>
+<span class="type">void</span> <span class="function">mostrarMenuPeriodo</span>() {
+    printf(<span class="string">"\nEscolha o período trabalhado deste funcionário:\n"</span>);
+    printf(<span class="string">"1 - 06:40 às 16:00\n"</span>);
+    printf(<span class="string">"2 - 08:00 às 16:20\n"</span>);
+    printf(<span class="string">"3 - 10:30 às 18:50\n"</span>);
+    printf(<span class="string">"4 - 13:00 às 21:20\n"</span>);
+    printf(<span class="string">"5 - 14:30 às 22:50\n"</span>);
 }
 
-// Função para converter número do cargo em texto
-void obterCargo(int codigo, char cargo[]) {
-    switch (codigo) {
-        case 1: strcpy(cargo, "Auxiliar nos Carrinhos"); break;
-        case 2: strcpy(cargo, "Operador de Caixa"); break;
-        case 3: strcpy(cargo, "Auxiliar de Self"); break;
-        case 4: strcpy(cargo, "Assistente de Frente de Caixa"); break;
-        case 5: strcpy(cargo, "Fiscal"); break;
-        default: strcpy(cargo, "Cargo inválido");
+<span class="comment">// Função para converter número do cargo em texto</span>
+<span class="type">void</span> <span class="function">obterCargo</span>(<span class="type">int</span> codigo, <span class="type">char</span> cargo[]) {
+    <span class="keyword">switch</span> (codigo) {
+        <span class="keyword">case</span> <span class="number">1</span>: strcpy(cargo, <span class="string">"Auxiliar nos Carrinhos"</span>); <span class="keyword">break</span>;
+        <span class="keyword">case</span> <span class="number">2</span>: strcpy(cargo, <span class="string">"Operador de Caixa"</span>); <span class="keyword">break</span>;
+        <span class="keyword">case</span> <span class="number">3</span>: strcpy(cargo, <span class="string">"Auxiliar de Self"</span>); <span class="keyword">break</span>;
+        <span class="keyword">case</span> <span class="number">4</span>: strcpy(cargo, <span class="string">"Assistente de Frente de Caixa"</span>); <span class="keyword">break</span>;
+        <span class="keyword">case</span> <span class="number">5</span>: strcpy(cargo, <span class="string">"Fiscal"</span>); <span class="keyword">break</span>;
+        <span class="keyword">default</span>: strcpy(cargo, <span class="string">"Cargo inválido"</span>);
     }
 }
 
-// Função para mostrar o período formatado
-void mostrarPeriodo(int periodo) {
-    switch (periodo) {
-        case 1: printf("Horário: 06:40 às 16:00\n"); break;
-        case 2: printf("Horário: 08:00 às 16:20\n"); break;
-        case 3: printf("Horário: 10:30 às 18:50\n"); break;
-        case 4: printf("Horário: 13:00 às 21:20\n"); break;
-        case 5: printf("Horário: 14:30 às 22:50\n"); break;
-        default: printf("Período inválido!\n");
+<span class="comment">// Função para mostrar o período formatado</span>
+<span class="type">void</span> <span class="function">mostrarPeriodo</span>(<span class="type">int</span> periodo) {
+    <span class="keyword">switch</span> (periodo) {
+        <span class="keyword">case</span> <span class="number">1</span>: printf(<span class="string">"Horário: 06:40 às 16:00\n"</span>); <span class="keyword">break</span>;
+        <span class="keyword">case</span> <span class="number">2</span>: printf(<span class="string">"Horário: 08:00 às 16:20\n"</span>); <span class="keyword">break</span>;
+        <span class="keyword">case</span> <span class="number">3</span>: printf(<span class="string">"Horário: 10:30 às 18:50\n"</span>); <span class="keyword">break</span>;
+        <span class="keyword">case</span> <span class="number">4</span>: printf(<span class="string">"Horário: 13:00 às 21:20\n"</span>); <span class="keyword">break</span>;
+        <span class="keyword">case</span> <span class="number">5</span>: printf(<span class="string">"Horário: 14:30 às 22:50\n"</span>); <span class="keyword">break</span>;
+        <span class="keyword">default</span>: printf(<span class="string">"Período inválido!\n"</span>);
     }
 }
 
-int main() {
-    char nome[50], cargo[50];
-    int codigoCargo, periodo;
+<span class="type">int</span> <span class="function">main</span>() {
+    <span class="type">char</span> nome[<span class="number">50</span>], cargo[<span class="number">50</span>];
+    <span class="type">int</span> codigoCargo, periodo;
 
-    printf("Digite o nome do funcionário: ");
-    scanf("%49s", nome);
+    printf(<span class="string">"Digite o nome do funcionário: "</span>);
+    scanf(<span class="string">"%49s"</span>, nome);
 
     mostrarMenuCargo();
-    printf("Digite o número correspondente: ");
-    scanf("%d", &codigoCargo);
+    printf(<span class="string">"Digite o número correspondente: "</span>);
+    scanf(<span class="string">"%d"</span>, &codigoCargo);
     obterCargo(codigoCargo, cargo);
 
     mostrarMenuPeriodo();
-    printf("Digite o número do período: ");
-    scanf("%d", &periodo);
+    printf(<span class="string">"Digite o número do período: "</span>);
+    scanf(<span class="string">"%d"</span>, &periodo);
 
-    printf("\n--- INFORMAÇÕES DO FUNCIONÁRIO DA LOJA FORT ATACADISTA - JUNDIAÍ ---\n");
-    printf("Nome: %s\n", nome);
-    printf("Cargo: %s\n", cargo);
+    printf(<span class="string">"\n--- INFORMAÇÕES DO FUNCIONÁRIO DA LOJA FORT ATACADISTA - JUNDIAÍ ---\n"</span>);
+    printf(<span class="string">"Nome: %s\n"</span>, nome);
+    printf(<span class="string">"Cargo: %s\n"</span>, cargo);
     mostrarPeriodo(periodo);
 
-    return 0;
+    <span class="keyword">return</span> <span class="number">0</span>;
 }
-
 </pre>
 </div>
 
