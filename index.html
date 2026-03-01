@@ -200,7 +200,10 @@ function copiarCodigo(){
     navigator.clipboard.writeText(elemento.innerText);
     alert("Código copiado!");
 }
-
+    
+elemento.innerHTML = codigoColorido;
+numerar();
+    
 </script>
 
 </body>
