@@ -5,68 +5,119 @@
 <title>codigo_funcionario.c</title>
 
 <style>
-    body {
-        margin: 0;
-        background-color: #1e1e1e;
-        font-family: Consolas, Monaco, monospace;
-        padding: 40px 0;
-    }
+body{
+    margin:0;
+    background:#1e1e1e;
+    font-family:Consolas, Monaco, monospace;
+    padding:40px 0;
+}
 
-    .editor {
-        background-color: #1e1e1e;
-        width: 95%;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 30px;
-        border-radius: 8px;
-        box-shadow: 0 0 25px rgba(0,0,0,0.7);
-        overflow-x: auto;
-    }
+.editor{
+    width:95%;
+    max-width:1200px;
+    margin:0 auto;
+    background:#1e1e1e;
+    padding:20px;
+    border-radius:8px;
+    box-shadow:0 0 25px rgba(0,0,0,0.7);
+    position:relative;
+}
 
-    pre {
-        margin: 0;
-        font-size: 14px;
-        line-height: 1.6;
-        color: #d4d4d4;
-        white-space: pre;
-    }
+button{
+    position:absolute;
+    top:15px;
+    right:15px;
+    background:#0e639c;
+    color:white;
+    border:none;
+    padding:8px 14px;
+    border-radius:5px;
+    cursor:pointer;
+    font-weight:bold;
+}
 
-    /* Cores estilo VS Code */
-    .include { color: #569CD6; }
-    .type { color: #4EC9B0; }
-    .keyword { color: #C586C0; }
-    .string { color: #CE9178; }
-    .comment { color: #6A9955; }
-    .function { color: #DCDCAA; }
-    .number { color: #B5CEA8; }
+button:hover{
+    background:#1177bb;
+}
+
+pre{
+    margin:0;
+    font-size:14px;
+    line-height:1.6;
+    counter-reset: line;
+}
+
+.line{
+    display:block;
+    padding-left:60px;
+    position:relative;
+}
+
+.line::before{
+    counter-increment: line;
+    content: counter(line);
+    position:absolute;
+    left:0;
+    width:50px;
+    text-align:right;
+    color:#858585;
+}
+
+/* Cores VS Code */
+.include{color:#569CD6;}
+.type{color:#4EC9B0;}
+.keyword{color:#C586C0;}
+.string{color:#CE9178;}
+.comment{color:#6A9955;}
+.function{color:#DCDCAA;}
+.number{color:#B5CEA8;}
+
+.cursor{
+    display:inline-block;
+    width:8px;
+    background:#ffffff;
+    animation:blink 1s infinite;
+}
+
+@keyframes blink{
+    0%{opacity:1;}
+    50%{opacity:0;}
+    100%{opacity:1;}
+}
 </style>
 </head>
 
 <body>
 
 <div class="editor">
-<pre>
+<button onclick="copiarCodigo()">Copiar Código</button>
+<pre id="codigo"></pre>
+</div>
+
+<script>
+
+const codigoColorido = `
 <span class="include">#include &lt;stdio.h&gt;</span>
 <span class="include">#include &lt;string.h&gt;</span>
 
 <span class="comment">// Função para mostrar o menu de cargos</span>
 <span class="type">void</span> <span class="function">mostrarMenuCargo</span>() {
-    printf(<span class="string">"\nEscolha o cargo fornecido para o funcionário:\n"</span>);
-    printf(<span class="string">"1 - Auxiliar nos Carrinhos\n"</span>);
-    printf(<span class="string">"2 - Operador de Caixa\n"</span>);
-    printf(<span class="string">"3 - Auxiliar de Self\n"</span>);
-    printf(<span class="string">"4 - Assistente de Frente de Caixa\n"</span>);
-    printf(<span class="string">"5 - Fiscal\n"</span>);
+    printf(<span class="string">"\\nEscolha o cargo fornecido para o funcionário:\\n"</span>);
+    printf(<span class="string">"1 - Auxiliar nos Carrinhos\\n"</span>);
+    printf(<span class="string">"2 - Operador de Caixa\\n"</span>);
+    printf(<span class="string">"3 - Auxiliar de Self\\n"</span>);
+    printf(<span class="string">"4 - Assistente de Frente de Caixa\\n"</span>);
+    printf(<span class="string">"5 - Fiscal\\n"</span>);
 }
 
 <span class="comment">// Função para mostrar o menu de períodos</span>
 <span class="type">void</span> <span class="function">mostrarMenuPeriodo</span>() {
-    printf(<span class="string">"\nEscolha o período trabalhado deste funcionário:\n"</span>);
-    printf(<span class="string">"1 - 06:40 às 16:00\n"</span>);
-    printf(<span class="string">"2 - 08:00 às 16:20\n"</span>);
-    printf(<span class="string">"3 - 10:30 às 18:50\n"</span>);
-    printf(<span class="string">"4 - 13:00 às 21:20\n"</span>);
-    printf(<span class="string">"5 - 14:30 às 22:50\n"</span>);
+    printf(<span class="string">"\\nEscolha o período trabalhado deste funcionário:\\n"</span>);
+    printf(<span class="string">"1 - 06:40 às 16:00\\n"</span>);
+    printf(<span class="string">"2 - 08:00 às 16:20\\n"</span>);
+    printf(<span class="string">"3 - 10:30 às 18:50\\n"</span>);
+    printf(<span class="string">"4 - 13:00 às 21:20\\n"</span>);
+    printf(<span class="string">"5 - 14:30 às 22:50\\n"</span>);
 }
 
 <span class="comment">// Função para converter número do cargo em texto</span>
@@ -84,12 +135,12 @@
 <span class="comment">// Função para mostrar o período formatado</span>
 <span class="type">void</span> <span class="function">mostrarPeriodo</span>(<span class="type">int</span> periodo) {
     <span class="keyword">switch</span> (periodo) {
-        <span class="keyword">case</span> <span class="number">1</span>: printf(<span class="string">"Horário: 06:40 às 16:00\n"</span>); <span class="keyword">break</span>;
-        <span class="keyword">case</span> <span class="number">2</span>: printf(<span class="string">"Horário: 08:00 às 16:20\n"</span>); <span class="keyword">break</span>;
-        <span class="keyword">case</span> <span class="number">3</span>: printf(<span class="string">"Horário: 10:30 às 18:50\n"</span>); <span class="keyword">break</span>;
-        <span class="keyword">case</span> <span class="number">4</span>: printf(<span class="string">"Horário: 13:00 às 21:20\n"</span>); <span class="keyword">break</span>;
-        <span class="keyword">case</span> <span class="number">5</span>: printf(<span class="string">"Horário: 14:30 às 22:50\n"</span>); <span class="keyword">break</span>;
-        <span class="keyword">default</span>: printf(<span class="string">"Período inválido!\n"</span>);
+        <span class="keyword">case</span> <span class="number">1</span>: printf(<span class="string">"Horário: 06:40 às 16:00\\n"</span>); <span class="keyword">break</span>;
+        <span class="keyword">case</span> <span class="number">2</span>: printf(<span class="string">"Horário: 08:00 às 16:20\\n"</span>); <span class="keyword">break</span>;
+        <span class="keyword">case</span> <span class="number">3</span>: printf(<span class="string">"Horário: 10:30 às 18:50\\n"</span>); <span class="keyword">break</span>;
+        <span class="keyword">case</span> <span class="number">4</span>: printf(<span class="string">"Horário: 13:00 às 21:20\\n"</span>); <span class="keyword">break</span>;
+        <span class="keyword">case</span> <span class="number">5</span>: printf(<span class="string">"Horário: 14:30 às 22:50\\n"</span>); <span class="keyword">break</span>;
+        <span class="keyword">default</span>: printf(<span class="string">"Período inválido!\\n"</span>);
     }
 }
 
@@ -109,15 +160,44 @@
     printf(<span class="string">"Digite o número do período: "</span>);
     scanf(<span class="string">"%d"</span>, &periodo);
 
-    printf(<span class="string">"\n--- INFORMAÇÕES DO FUNCIONÁRIO DA LOJA FORT ATACADISTA - JUNDIAÍ ---\n"</span>);
-    printf(<span class="string">"Nome: %s\n"</span>, nome);
-    printf(<span class="string">"Cargo: %s\n"</span>, cargo);
+    printf(<span class="string">"\\n--- INFORMAÇÕES DO FUNCIONÁRIO DA LOJA FORT ATACADISTA - JUNDIAÍ ---\\n"</span>);
+    printf(<span class="string">"Nome: %s\\n"</span>, nome);
+    printf(<span class="string">"Cargo: %s\\n"</span>, cargo);
     mostrarPeriodo(periodo);
 
     <span class="keyword">return</span> <span class="number">0</span>;
 }
-</pre>
-</div>
+`;
+
+const elemento = document.getElementById("codigo");
+let i = 0;
+
+function digitar(){
+    if(i < codigoColorido.length){
+        elemento.innerHTML += codigoColorido.charAt(i);
+        i++;
+        setTimeout(digitar, 2);
+    } else {
+        numerarLinhas();
+    }
+}
+
+function numerarLinhas(){
+    const linhas = elemento.innerHTML.split("\n");
+    elemento.innerHTML = "";
+    linhas.forEach(linha=>{
+        elemento.innerHTML += `<span class="line">${linha}</span>`;
+    });
+}
+
+function copiarCodigo(){
+    navigator.clipboard.writeText(elemento.innerText);
+    alert("Código copiado!");
+}
+
+digitar();
+
+</script>
 
 </body>
 </html>
