@@ -7,7 +7,7 @@
 <style>
 body{
     margin:0;
-    background:#1e1e1e;
+    background:#252526;
     font-family:Consolas, Monaco, monospace;
     padding:40px 0;
 }
@@ -17,9 +17,9 @@ body{
     max-width:1200px;
     margin:0 auto;
     background:#1e1e1e;
-    padding:20px;
+    padding:25px;
     border-radius:8px;
-    box-shadow:0 0 25px rgba(0,0,0,0.7);
+    box-shadow:0 0 25px rgba(0,0,0,0.6);
     position:relative;
 }
 
@@ -42,7 +42,7 @@ button:hover{
 
 pre{
     margin:0;
-    font-size:14px;
+    font-size:15px;
     line-height:1.6;
     counter-reset: line;
 }
@@ -76,6 +76,7 @@ pre{
     display:inline-block;
     width:8px;
     background:#ffffff;
+    margin-left:3px;
     animation:blink 1s infinite;
 }
 
@@ -110,7 +111,7 @@ const codigoColorido = `
     printf(<span class="string">"5 - Fiscal\\n"</span>);
 }
 
-<span class="comment">// Função para mostrar o menu de períodos</span>
+// Função para mostrar o menu de períodos
 <span class="type">void</span> <span class="function">mostrarMenuPeriodo</span>() {
     printf(<span class="string">"\\nEscolha o período trabalhado deste funcionário:\\n"</span>);
     printf(<span class="string">"1 - 06:40 às 16:00\\n"</span>);
@@ -120,7 +121,7 @@ const codigoColorido = `
     printf(<span class="string">"5 - 14:30 às 22:50\\n"</span>);
 }
 
-<span class="comment">// Função para converter número do cargo em texto</span>
+// Função para converter número do cargo em texto
 <span class="type">void</span> <span class="function">obterCargo</span>(<span class="type">int</span> codigo, <span class="type">char</span> cargo[]) {
     <span class="keyword">switch</span> (codigo) {
         <span class="keyword">case</span> <span class="number">1</span>: strcpy(cargo, <span class="string">"Auxiliar nos Carrinhos"</span>); <span class="keyword">break</span>;
@@ -132,7 +133,7 @@ const codigoColorido = `
     }
 }
 
-<span class="comment">// Função para mostrar o período formatado</span>
+// Função para mostrar o período formatado
 <span class="type">void</span> <span class="function">mostrarPeriodo</span>(<span class="type">int</span> periodo) {
     <span class="keyword">switch</span> (periodo) {
         <span class="keyword">case</span> <span class="number">1</span>: printf(<span class="string">"Horário: 06:40 às 16:00\\n"</span>); <span class="keyword">break</span>;
@@ -170,23 +171,27 @@ const codigoColorido = `
 `;
 
 const elemento = document.getElementById("codigo");
-let i = 0;
 
-function digitar(){
-    if(i < codigoColorido.length){
-        elemento.innerHTML += codigoColorido.charAt(i);
+function animar(texto){
+    let i = 0;
+    function escrever(){
+        elemento.innerHTML = texto.substring(0,i) + '<span class="cursor"></span>';
         i++;
-        setTimeout(digitar, 2);
-    } else {
-        numerarLinhas();
+        if(i <= texto.length){
+            setTimeout(escrever,1);
+        } else {
+            elemento.innerHTML = texto;
+            numerar();
+        }
     }
+    escrever();
 }
 
-function numerarLinhas(){
+function numerar(){
     const linhas = elemento.innerHTML.split("\n");
     elemento.innerHTML = "";
-    linhas.forEach(linha=>{
-        elemento.innerHTML += `<span class="line">${linha}</span>`;
+    linhas.forEach(l=>{
+        elemento.innerHTML += `<span class="line">${l}</span>`;
     });
 }
 
@@ -195,7 +200,7 @@ function copiarCodigo(){
     alert("Código copiado!");
 }
 
-digitar();
+animar(codigoColorido);
 
 </script>
 
